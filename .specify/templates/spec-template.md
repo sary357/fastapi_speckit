@@ -8,6 +8,9 @@
 
 **Input**: User description: "$ARGUMENTS"
 
+**Language**: Per the project constitution (Principle I, Language and Localization Standards), this
+specification MUST be written in Traditional Chinese (zh-TW).
+
 ## User Scenarios & Testing *(mandatory)*
 
 <!--

@@ -6,6 +6,9 @@
 
 **Note**: This template is filled in by the `/speckit.plan` command; its definition describes the execution workflow.
 
+**Language**: Per the project constitution (Principle I, Language and Localization Standards), this
+plan MUST be written in Traditional Chinese (zh-TW).
+
 ## Summary
 
 [Extract from feature spec: primary requirement + technical approach from research]
