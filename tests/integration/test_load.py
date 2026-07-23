@@ -2,7 +2,7 @@
 
 import pytest
 import asyncio
-from httpx import AsyncClient
+from httpx import AsyncClient, ASGITransport
 
 from src.main import app
 
@@ -16,7 +16,7 @@ async def test_load_100_concurrent_requests():
     - No data loss (all requests succeed)
     - No errors or crashes
     """
-    async with AsyncClient(app=app, base_url="http://test") as client:
+    async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:
         async def make_request(ip_index: int) -> int:
             """Make a request (simulating different IP via header)."""
             # Simulate different IPs by using different client IPs
@@ -46,7 +46,7 @@ async def test_load_100_concurrent_requests():
 @pytest.mark.asyncio
 async def test_load_comments_100_concurrent():
     """T040: Verify comment endpoint can handle 100 concurrent requests."""
-    async with AsyncClient(app=app, base_url="http://test") as client:
+    async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:
         async def make_comment(index: int) -> int:
             """Make a comment request."""
             response = await client.post(

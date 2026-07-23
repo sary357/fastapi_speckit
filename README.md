@@ -6,7 +6,7 @@
 - 👍 送出「讚」反應
 - 👎 送出「不讚」反應
 - 💬 送出留言（最多 1000 字元）
-- 🚦 每來源 IP 每分鐘限制 3 次請求（兩端點合計）
+- 🚦 每來源 IP 每分鐘限制 5 次請求（兩端點合計）
 
 ## 快速開始（本地測試）
 
@@ -119,8 +119,8 @@ curl -X POST http://localhost:8000/api/comments \
   -H "Content-Type: application/json" \
   -d '{"content": "Hello!"}'
 
-# 測試速率限制（第 4 個請求應回 429）
-for i in {1..4}; do
+# 測試速率限制（第 6 個請求應回 429）
+for i in {1..6}; do
   curl -X POST http://localhost:8000/api/reactions \
     -H "Content-Type: application/json" \
     -d '{"reaction_type": "like"}'

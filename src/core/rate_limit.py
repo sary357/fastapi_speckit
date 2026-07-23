@@ -7,6 +7,6 @@ from slowapi.util import get_remote_address
 # Uses request.client.host as the key (per-IP rate limiting)
 limiter = Limiter(
     key_func=get_remote_address,
-    default_limits=["3/minute"],  # 3 requests per minute per IP
+    default_limits=["5/minute"],  # 5 requests per minute per IP
     storage_uri=None,  # Use in-memory storage (default)
 )

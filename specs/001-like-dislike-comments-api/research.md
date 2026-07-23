@@ -86,10 +86,10 @@ FastAPI、PostgreSQL、Docker／docker compose 供本地測試），故無 `NEED
 
 - **Decision**: 使用 `slowapi`（基於 `limits` 套件、專為 Starlette/FastAPI 設計的速率限制
   函式庫），以請求的來源 IP（`request.client.host`）作為限制鍵值，對 `POST /api/reactions`
-  與 `POST /api/comments` 兩個端點套用「每分鐘 3 次」的限制（依規格 FR-012），儲存後端使用
+  與 `POST /api/comments` 兩個端點套用「每分鐘 5 次」的限制（依規格 FR-012），儲存後端使用
   預設的記憶體內（in-memory）儲存。超過限制時，`slowapi` 預設回覆 HTTP 429。
 - **Rationale**: `slowapi` 可直接以裝飾器套用於 FastAPI 路由，設定簡單、與規格描述的
-  「每個來源 IP 每分鐘最多 3 次請求（兩端點合計）」語意相符；本功能為單一 process 部署
+  「每個來源 IP 每分鐘最多 5 次請求（兩端點合計）」語意相符；本功能為單一 process 部署
   （docker compose 單一 `api` 容器），記憶體內儲存已足夠，不需引入 Redis 等額外元件。
 - **Trade-offs**: 記憶體內儲存的限制計數器僅存在於單一 process 內，若未來部署為多個
   `api` 副本（horizontal scaling），各副本會有各自獨立的計數、無法共享限制狀態；若日後有

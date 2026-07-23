@@ -80,15 +80,15 @@ curl -i -X POST http://localhost:8000/api/comments \
 ## 驗證：速率限制（Rate Limiting）
 
 ```bash
-# 連續送出 4 次讚反應（同一來源 IP，1 分鐘內）
-for i in 1 2 3 4; do
+# 連續送出 6 次讚反應（同一來源 IP，1 分鐘內）
+for i in 1 2 3 4 5 6; do
   curl -i -X POST http://localhost:8000/api/reactions \
     -H "Content-Type: application/json" \
     -d '{"reaction_type": "like"}'
 done
 ```
 
-**預期結果**：前 3 次請求回應 HTTP 200 與 `{"status": "OK"}`；第 4 次請求回應 HTTP 429，
+**預期結果**：前 5 次請求回應 HTTP 200 與 `{"status": "OK"}`；第 6 次請求回應 HTTP 429，
 且不應被記錄為有效資料（對應 FR-012、SC-006）。
 
 ## 驗證：資料已正確記錄

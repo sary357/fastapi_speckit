@@ -13,7 +13,7 @@ service = ReactionService()
 
 
 @router.post("/reactions", response_model=StatusResponse)
-@limiter.limit("3/minute")
+@limiter.shared_limit("5/minute", scope="reactions_comments")
 async def create_reaction(
     request: Request,
     body: ReactionRequest,
@@ -22,7 +22,7 @@ async def create_reaction(
     """
     Submit a like or dislike reaction.
     
-    Rate limited to 3 requests per minute per IP across both /api/reactions and /api/comments endpoints.
+    Rate limited to 5 requests per minute per IP across both /api/reactions and /api/comments endpoints.
     """
     # Extract source IP
     source_ip = request.client.host if request.client else "unknown"

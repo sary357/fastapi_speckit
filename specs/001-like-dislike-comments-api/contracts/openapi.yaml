@@ -31,7 +31,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
         "429":
-          description: 超過速率限制（每來源 IP 每分鐘最多 3 次，讚/不讚與留言兩端點合計）
+          description: 超過速率限制（每來源 IP 每分鐘最多 5 次，讚/不讚與留言兩端點合計）
           content:
             application/json:
               schema:
@@ -61,7 +61,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
         "429":
-          description: 超過速率限制（每來源 IP 每分鐘最多 3 次，讚/不讚與留言兩端點合計）
+          description: 超過速率限制（每來源 IP 每分鐘最多 5 次，讚/不讚與留言兩端點合計）
           content:
             application/json:
               schema:

@@ -72,7 +72,7 @@ descriptions MUST be written in Traditional Chinese (zh-TW).
 - [x] T011 [P] [US1] 契約測試：`POST /api/reactions` 送出 `like` 回應 200 與 `{"status": "OK"}`，於 `tests/contract/test_reactions_contract.py`
 - [x] T012 [P] [US1] 契約測試：`POST /api/reactions` 送出 `dislike` 回應 200 與 `{"status": "OK"}`，於 `tests/contract/test_reactions_contract.py`
 - [x] T013 [P] [US1] 契約測試：`POST /api/reactions` 缺漏或不合法的 `reaction_type` 回應 422，於 `tests/contract/test_reactions_contract.py`
-- [x] T014 [P] [US1] 契約測試：同一來源 IP 於 1 分鐘內第 4 次請求回應 429（依 FR-012、SC-006），於 `tests/contract/test_reactions_contract.py`
+- [x] T014 [P] [US1] 契約測試：同一來源 IP 於 1 分鐘內第 6 次請求回應 429（依 FR-012、SC-006），於 `tests/contract/test_reactions_contract.py`
 - [x] T015 [P] [US1] 整合測試：反應提交後，資料庫確實新增一筆包含正確 `reaction_type`、UTC `received_at`、`source_ip` 的紀錄，於 `tests/integration/test_reactions_integration.py`
 - [x] T016 [P] [US1] 單元測試：`ReactionService` 對非法 `reaction_type` 拋出驗證錯誤，於 `tests/unit/test_reaction_service.py`
 
@@ -103,7 +103,7 @@ descriptions MUST be written in Traditional Chinese (zh-TW).
 - [x] T023 [P] [US2] 契約測試：`POST /api/comments` 送出有效留言回應 200 與 `{"status": "OK"}`，於 `tests/contract/test_comments_contract.py`
 - [x] T024 [P] [US2] 契約測試：`POST /api/comments` 送出空白或缺漏留言回應 422（依 FR-008），於 `tests/contract/test_comments_contract.py`
 - [x] T025 [P] [US2] 契約測試：`POST /api/comments` 送出超過 1000 字元的留言回應 422（依 FR-008、SC-007），於 `tests/contract/test_comments_contract.py`
-- [x] T026 [P] [US2] 契約測試：同一來源 IP 於 1 分鐘內第 4 次留言請求回應 429（依 FR-012、SC-006），於 `tests/contract/test_comments_contract.py`
+- [x] T026 [P] [US2] 契約測試：同一來源 IP 於 1 分鐘內第 6 次留言請求回應 429（依 FR-012、SC-006），於 `tests/contract/test_comments_contract.py`
 - [x] T027 [P] [US2] 整合測試：留言提交後，資料庫確實新增一筆包含正確 `content`、UTC `received_at`、`source_ip` 的紀錄，於 `tests/integration/test_comments_integration.py`
 - [x] T028 [P] [US2] 單元測試：`CommentService` 拒絕空白／缺漏／超過 1000 字元的留言內容，於 `tests/unit/test_comment_service.py`
 
@@ -172,7 +172,7 @@ descriptions MUST be written in Traditional Chinese (zh-TW).
 Task: "契約測試：POST /api/reactions 送出 like 回應 200 於 tests/contract/test_reactions_contract.py"
 Task: "契約測試：POST /api/reactions 送出 dislike 回應 200 於 tests/contract/test_reactions_contract.py"
 Task: "契約測試：POST /api/reactions 缺漏 reaction_type 回應 422 於 tests/contract/test_reactions_contract.py"
-Task: "契約測試：同一 IP 第 4 次請求回應 429 於 tests/contract/test_reactions_contract.py"
+Task: "契約測試：同一 IP 第 6 次請求回應 429 於 tests/contract/test_reactions_contract.py"
 Task: "整合測試：反應紀錄正確寫入於 tests/integration/test_reactions_integration.py"
 Task: "單元測試：ReactionService 驗證邏輯於 tests/unit/test_reaction_service.py"
 

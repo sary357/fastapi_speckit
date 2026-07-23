@@ -14,7 +14,7 @@ service = CommentService()
 
 
 @router.post("/comments", response_model=StatusResponse)
-@limiter.limit("3/minute")
+@limiter.shared_limit("5/minute", scope="reactions_comments")
 async def create_comment(
     request: Request,
     body: CommentRequest,
@@ -23,7 +23,7 @@ async def create_comment(
     """
     Submit a comment.
     
-    Rate limited to 3 requests per minute per IP across both /api/reactions and /api/comments endpoints.
+    Rate limited to 5 requests per minute per IP across both /api/reactions and /api/comments endpoints.
     
     Comment content:
     - Must not be empty or whitespace-only
