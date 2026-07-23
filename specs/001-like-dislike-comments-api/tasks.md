@@ -34,10 +34,10 @@ descriptions MUST be written in Traditional Chinese (zh-TW).
 
 **Purpose**: 專案初始化與基礎結構
 
-- [ ] T001 依 plan.md 的 Project Structure 建立目錄結構：`src/{core,db,models,schemas,api/routes,services}`、`tests/{contract,integration,unit}`、`migrations/`（含 `__init__.py` 等必要檔案）
-- [ ] T002 於 `pyproject.toml` 設定 `pytest`（含 `pytest-asyncio` 的 `asyncio_mode`）與測試涵蓋率門檻（依憲章 III，最低 80%）
-- [ ] T003 [P] 於 `pyproject.toml` 設定 `ruff`（lint）與 `black`（格式化）規則（依憲章 II、research.md 第 9 節）
-- [ ] T004 [P] 建立 `alembic.ini` 與 `migrations/env.py`，設定連線至 `DATABASE_URL`（依 research.md 第 2 節）
+- [x] T001 依 plan.md 的 Project Structure 建立目錄結構：`src/{core,db,models,schemas,api/routes,services}`、`tests/{contract,integration,unit}`、`migrations/`（含 `__init__.py` 等必要檔案）
+- [x] T002 於 `pyproject.toml` 設定 `pytest`（含 `pytest-asyncio` 的 `asyncio_mode`）與測試涵蓋率門檻（依憲章 III，最低 80%）
+- [x] T003 [P] 於 `pyproject.toml` 設定 `ruff`（lint）與 `black`（格式化）規則（依憲章 II、research.md 第 9 節）
+- [x] T004 [P] 建立 `alembic.ini` 與 `migrations/env.py`，設定連線至 `DATABASE_URL`（依 research.md 第 2 節）
 
 ---
 
@@ -47,12 +47,12 @@ descriptions MUST be written in Traditional Chinese (zh-TW).
 
 **⚠️ CRITICAL**: 本階段完成前，不得開始任何使用者故事的實作
 
-- [ ] T005 於 `src/core/config.py` 建立 `pydantic-settings` 設定類別，讀取 `DATABASE_URL` 等環境變數
-- [ ] T006 於 `src/db/base.py` 建立 SQLAlchemy `DeclarativeBase`
-- [ ] T007 於 `src/db/session.py` 建立非同步 engine 與 `AsyncSession` 相依注入（depends on T005, T006）
-- [ ] T008 [P] 於 `src/core/rate_limit.py` 建立共用的 `slowapi` `Limiter` 實例，以 `request.client.host` 為鍵值（依 research.md 第 8 節、規格 FR-012）
-- [ ] T009 於 `src/main.py` 建立 FastAPI 應用程式進入點，掛載 `Limiter`、註冊 429／422 錯誤處理器（depends on T008）
-- [ ] T010 [P] 於 `src/core/errors.py` 建立統一的驗證失敗與速率限制錯誤回應格式（呼應 contracts/openapi.yaml 的 `ErrorResponse`）
+- [x] T005 於 `src/core/config.py` 建立 `pydantic-settings` 設定類別，讀取 `DATABASE_URL` 等環境變數
+- [x] T006 於 `src/db/base.py` 建立 SQLAlchemy `DeclarativeBase`
+- [x] T007 於 `src/db/session.py` 建立非同步 engine 與 `AsyncSession` 相依注入（depends on T005, T006）
+- [x] T008 [P] 於 `src/core/rate_limit.py` 建立共用的 `slowapi` `Limiter` 實例，以 `request.client.host` 為鍵值（依 research.md 第 8 節、規格 FR-012）
+- [x] T009 於 `src/main.py` 建立 FastAPI 應用程式進入點，掛載 `Limiter`、註冊 429／422 錯誤處理器（depends on T008）
+- [x] T010 [P] 於 `src/core/errors.py` 建立統一的驗證失敗與速率限制錯誤回應格式（呼應 contracts/openapi.yaml 的 `ErrorResponse`）
 
 **Checkpoint**: 基礎建設完成，使用者故事可開始平行實作
 
@@ -69,21 +69,21 @@ descriptions MUST be written in Traditional Chinese (zh-TW).
 
 > **注意：以下測試須先撰寫並確認會失敗，之後才開始實作**
 
-- [ ] T011 [P] [US1] 契約測試：`POST /api/reactions` 送出 `like` 回應 200 與 `{"status": "OK"}`，於 `tests/contract/test_reactions_contract.py`
-- [ ] T012 [P] [US1] 契約測試：`POST /api/reactions` 送出 `dislike` 回應 200 與 `{"status": "OK"}`，於 `tests/contract/test_reactions_contract.py`
-- [ ] T013 [P] [US1] 契約測試：`POST /api/reactions` 缺漏或不合法的 `reaction_type` 回應 422，於 `tests/contract/test_reactions_contract.py`
-- [ ] T014 [P] [US1] 契約測試：同一來源 IP 於 1 分鐘內第 4 次請求回應 429（依 FR-012、SC-006），於 `tests/contract/test_reactions_contract.py`
-- [ ] T015 [P] [US1] 整合測試：反應提交後，資料庫確實新增一筆包含正確 `reaction_type`、UTC `received_at`、`source_ip` 的紀錄，於 `tests/integration/test_reactions_integration.py`
-- [ ] T016 [P] [US1] 單元測試：`ReactionService` 對非法 `reaction_type` 拋出驗證錯誤，於 `tests/unit/test_reaction_service.py`
+- [x] T011 [P] [US1] 契約測試：`POST /api/reactions` 送出 `like` 回應 200 與 `{"status": "OK"}`，於 `tests/contract/test_reactions_contract.py`
+- [x] T012 [P] [US1] 契約測試：`POST /api/reactions` 送出 `dislike` 回應 200 與 `{"status": "OK"}`，於 `tests/contract/test_reactions_contract.py`
+- [x] T013 [P] [US1] 契約測試：`POST /api/reactions` 缺漏或不合法的 `reaction_type` 回應 422，於 `tests/contract/test_reactions_contract.py`
+- [x] T014 [P] [US1] 契約測試：同一來源 IP 於 1 分鐘內第 4 次請求回應 429（依 FR-012、SC-006），於 `tests/contract/test_reactions_contract.py`
+- [x] T015 [P] [US1] 整合測試：反應提交後，資料庫確實新增一筆包含正確 `reaction_type`、UTC `received_at`、`source_ip` 的紀錄，於 `tests/integration/test_reactions_integration.py`
+- [x] T016 [P] [US1] 單元測試：`ReactionService` 對非法 `reaction_type` 拋出驗證錯誤，於 `tests/unit/test_reaction_service.py`
 
 ### Implementation for User Story 1
 
-- [ ] T017 [P] [US1] 建立 `ReactionRecord` ORM 模型（`reaction_type`、`received_at`、`source_ip`）於 `src/models/reaction.py`
-- [ ] T018 [P] [US1] 建立讚／不讚請求與回應的 Pydantic Schema 於 `src/schemas/reaction.py`
-- [ ] T019 [US1] 實作 `ReactionService`（寫入紀錄、擷取 UTC 時間與來源 IP）於 `src/services/reaction_service.py`（depends on T017, T018）
-- [ ] T020 [US1] 實作 `POST /api/reactions` 路由，套用速率限制裝飾器於 `src/api/routes/reactions.py`（depends on T019, T008）
-- [ ] T021 [US1] 新增 `reactions` 資料表的 Alembic migration 於 `migrations/versions/`
-- [ ] T022 [US1] 於 `src/main.py` 掛載 `reactions` 路由（depends on T020）
+- [x] T017 [P] [US1] 建立 `ReactionRecord` ORM 模型（`reaction_type`、`received_at`、`source_ip`）於 `src/models/reaction.py`
+- [x] T018 [P] [US1] 建立讚／不讚請求與回應的 Pydantic Schema 於 `src/schemas/reaction.py`
+- [x] T019 [US1] 實作 `ReactionService`（寫入紀錄、擷取 UTC 時間與來源 IP）於 `src/services/reaction_service.py`（depends on T017, T018）
+- [x] T020 [US1] 實作 `POST /api/reactions` 路由，套用速率限制裝飾器於 `src/api/routes/reactions.py`（depends on T019, T008）
+- [x] T021 [US1] 新增 `reactions` 資料表的 Alembic migration 於 `migrations/versions/`
+- [x] T022 [US1] 於 `src/main.py` 掛載 `reactions` 路由（depends on T020）
 
 **Checkpoint**: User Story 1 應可獨立完整運作與測試
 
@@ -100,21 +100,21 @@ descriptions MUST be written in Traditional Chinese (zh-TW).
 
 > **注意：以下測試須先撰寫並確認會失敗，之後才開始實作**
 
-- [ ] T023 [P] [US2] 契約測試：`POST /api/comments` 送出有效留言回應 200 與 `{"status": "OK"}`，於 `tests/contract/test_comments_contract.py`
-- [ ] T024 [P] [US2] 契約測試：`POST /api/comments` 送出空白或缺漏留言回應 422（依 FR-008），於 `tests/contract/test_comments_contract.py`
-- [ ] T025 [P] [US2] 契約測試：`POST /api/comments` 送出超過 1000 字元的留言回應 422（依 FR-008、SC-007），於 `tests/contract/test_comments_contract.py`
-- [ ] T026 [P] [US2] 契約測試：同一來源 IP 於 1 分鐘內第 4 次留言請求回應 429（依 FR-012、SC-006），於 `tests/contract/test_comments_contract.py`
-- [ ] T027 [P] [US2] 整合測試：留言提交後，資料庫確實新增一筆包含正確 `content`、UTC `received_at`、`source_ip` 的紀錄，於 `tests/integration/test_comments_integration.py`
-- [ ] T028 [P] [US2] 單元測試：`CommentService` 拒絕空白／缺漏／超過 1000 字元的留言內容，於 `tests/unit/test_comment_service.py`
+- [x] T023 [P] [US2] 契約測試：`POST /api/comments` 送出有效留言回應 200 與 `{"status": "OK"}`，於 `tests/contract/test_comments_contract.py`
+- [x] T024 [P] [US2] 契約測試：`POST /api/comments` 送出空白或缺漏留言回應 422（依 FR-008），於 `tests/contract/test_comments_contract.py`
+- [x] T025 [P] [US2] 契約測試：`POST /api/comments` 送出超過 1000 字元的留言回應 422（依 FR-008、SC-007），於 `tests/contract/test_comments_contract.py`
+- [x] T026 [P] [US2] 契約測試：同一來源 IP 於 1 分鐘內第 4 次留言請求回應 429（依 FR-012、SC-006），於 `tests/contract/test_comments_contract.py`
+- [x] T027 [P] [US2] 整合測試：留言提交後，資料庫確實新增一筆包含正確 `content`、UTC `received_at`、`source_ip` 的紀錄，於 `tests/integration/test_comments_integration.py`
+- [x] T028 [P] [US2] 單元測試：`CommentService` 拒絕空白／缺漏／超過 1000 字元的留言內容，於 `tests/unit/test_comment_service.py`
 
 ### Implementation for User Story 2
 
-- [ ] T029 [P] [US2] 建立 `CommentRecord` ORM 模型（`content`、`received_at`、`source_ip`）於 `src/models/comment.py`
-- [ ] T030 [P] [US2] 建立留言請求與回應的 Pydantic Schema（`min_length=1`、`max_length=1000`，去除前後空白後驗證非空）於 `src/schemas/comment.py`
-- [ ] T031 [US2] 實作 `CommentService`（驗證內容、寫入紀錄、擷取 UTC 時間與來源 IP）於 `src/services/comment_service.py`（depends on T029, T030）
-- [ ] T032 [US2] 實作 `POST /api/comments` 路由，套用速率限制裝飾器於 `src/api/routes/comments.py`（depends on T031, T008）
-- [ ] T033 [US2] 新增 `comments` 資料表的 Alembic migration 於 `migrations/versions/`
-- [ ] T034 [US2] 於 `src/main.py` 掛載 `comments` 路由（depends on T032）
+- [x] T029 [P] [US2] 建立 `CommentRecord` ORM 模型（`content`、`received_at`、`source_ip`）於 `src/models/comment.py`
+- [x] T030 [P] [US2] 建立留言請求與回應的 Pydantic Schema（`min_length=1`、`max_length=1000`，去除前後空白後驗證非空）於 `src/schemas/comment.py`
+- [x] T031 [US2] 實作 `CommentService`（驗證內容、寫入紀錄、擷取 UTC 時間與來源 IP）於 `src/services/comment_service.py`（depends on T029, T030）
+- [x] T032 [US2] 實作 `POST /api/comments` 路由，套用速率限制裝飾器於 `src/api/routes/comments.py`（depends on T031, T008）
+- [x] T033 [US2] 新增 `comments` 資料表的 Alembic migration 於 `migrations/versions/`
+- [x] T034 [US2] 於 `src/main.py` 掛載 `comments` 路由（depends on T032）
 
 **Checkpoint**: User Story 1 與 User Story 2 應皆可獨立運作
 
@@ -124,12 +124,12 @@ descriptions MUST be written in Traditional Chinese (zh-TW).
 
 **Purpose**: 影響多個使用者故事的改善項目
 
-- [ ] T035 [P] 單元測試：驗證速率限制器以「讚／不讚與留言兩端點合計」計算同一來源 IP 的請求次數，於 `tests/unit/test_rate_limit.py`
-- [ ] T036 [P] 執行 `pytest --cov` 確認整體測試涵蓋率達到憲章 III 要求的 80% 門檻
-- [ ] T037 依 [quickstart.md](./quickstart.md) 完整執行本地端 `docker compose` 驗證流程（讚／不讚、留言、速率限制、超長留言情境）
-- [ ] T038 [P] 於 `README.md` 補充本地啟動、`docker compose` 使用與測試執行說明
-- [ ] T039 安全性檢查：確認所有查詢皆為參數化（SQLAlchemy ORM）、輸入皆於系統邊界驗證、無憑證寫死於程式碼中（依憲章 VIII）
-- [ ] T040 負載測試：模擬至少 100 個不同來源 IP（避免觸發 FR-012 的 per-IP 速率限制）併發送出讚／不讚與留言請求，驗證全部成功回應且資料完整、無遺失（依規格 SC-003、憲章 V「重大發布前需完成負載測試」之規定），於 `tests/integration/test_load.py`
+- [x] T035 [P] 單元測試：驗證速率限制器以「讚／不讚與留言兩端點合計」計算同一來源 IP 的請求次數，於 `tests/unit/test_rate_limit.py`
+- [x] T036 [P] 執行 `pytest --cov` 確認整體測試涵蓋率達到憲章 III 要求的 80% 門檻
+- [x] T037 依 [quickstart.md](./quickstart.md) 完整執行本地端 `docker compose` 驗證流程（讚／不讚、留言、速率限制、超長留言情境）
+- [x] T038 [P] 於 `README.md` 補充本地啟動、`docker compose` 使用與測試執行說明
+- [x] T039 安全性檢查：確認所有查詢皆為參數化（SQLAlchemy ORM）、輸入皆於系統邊界驗證、無憑證寫死於程式碼中（依憲章 VIII）
+- [x] T040 負載測試：模擬至少 100 個不同來源 IP（避免觸發 FR-012 的 per-IP 速率限制）併發送出讚／不讚與留言請求，驗證全部成功回應且資料完整、無遺失（依規格 SC-003、憲章 V「重大發布前需完成負載測試」之規定），於 `tests/integration/test_load.py`
 
 ---
 
